@@ -1,5 +1,5 @@
 ----------EN----------
-Displaying a general table with accrual and tables with accrual by period
+Displaying a general table with accruals and tables with accruals by period
 
 ----------RU----------
-Вывод общей таблицы с начислением и таблиц с начислением по периоду
+Вывод общей таблицы с начислениями и таблиц с начислением по периоду
