@@ -2,15 +2,20 @@
 <h4>Отчет показывает начисления по периодам за текущий год</h4>
 <br>
 <% if (getMonthlyAccruals().length !== 0) { %>
+<% let currentPeriod = ""; %>
 <% let totalAccrued = 0; %>
 <% let totalNdfl = 0; %>
 <% let totalTotal = 0; %>
 
-<% let currentPeriod = ""; %>
+<% for (let i = 0; i < getMonthlyAccruals().length; i++) { %>
+<% const detail = getMonthlyAccruals()[i]; %>
 
-<% for (const detail of getMonthlyAccruals()) { %>
 <% if (currentPeriod !== detail.period) { %>
+<% // Сбрасываем счетчики итоговых сумм для нового периода %>
 <% currentPeriod = detail.period; %>
+<% totalAccrued = 0; %>
+<% totalNdfl = 0; %>
+<% totalTotal = 0; %>
 
 <h3><%= currentPeriod %></h3>
 <table class="sl-table">
@@ -37,10 +42,13 @@
         <td class="sl-table__line-cell"><%= detail.total %></td>
     </tr>
 
-    <% totalAccrued += detail.accrued %>
-    <% totalNdfl += detail.ndfl %>
-    <% totalTotal += detail.total %>
-    <% if (detail === getMonthlyAccruals()[getMonthlyAccruals().length - 1] || currentPeriod !== getMonthlyAccruals()[getMonthlyAccruals().indexOf(detail) + 1].period) { %>
+    <% // Суммируем начисления для текущего периода %>
+    <% totalAccrued += detail.accrued; %>
+    <% totalNdfl += detail.ndfl; %>
+    <% totalTotal += detail.total; %>
+
+    <% // Если это последняя запись или следующий период отличается, выводим итоги %>
+    <% if (i === getMonthlyAccruals().length - 1 || detail.period !== getMonthlyAccruals()[i + 1].period) { %>
     <tr class="sl-table__total">
         <td class="sl-table__total-cell">Итого</td>
         <td class="sl-table__total-cell"></td>
@@ -56,5 +64,5 @@
 <% } %>
 <% } %>
 <% } else { %>
-<p>Данные отсутствуют</p>
+<h2>Данные отсутствуют</h2>
 <% } %>

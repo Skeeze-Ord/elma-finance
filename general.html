@@ -14,11 +14,11 @@
         <th class="sl-table__head-cell">Выплачено</th>
         <th class="sl-table__head-cell">Разница</th>
     </tr>
+
     <% for (const accrual of getAccruals()) { %>
     <% totalAccrued += accrual.accrued; %>
     <% totalPrepaid += accrual.prepaid; %>
     <% totalSalary += accrual.salary; %>
-
     <tr class="sl-table__line">
         <td class="sl-table__line-cell"><%= accrual.period %></td>
         <td class="sl-table__line-cell"><%= accrual.accrued.toFixed(2) %></td>
