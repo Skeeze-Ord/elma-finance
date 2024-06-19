@@ -132,7 +132,7 @@ async function onProjects() {
 
 
 // Убрать знаки после запятой
-function convertToFixed(item: number) {
+function convertToFixed(item: number):number {
     return Number(item.toFixed(3));
 }
 
