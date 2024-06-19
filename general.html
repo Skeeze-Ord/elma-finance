@@ -1,0 +1,42 @@
+<% if (getAccruals().length !== 0) { %>
+<% let totalAccrued = 0; %>
+<% let totalPrepaid = 0; %>
+<% let totalSalary = 0; %>
+
+<h4>Отчет показывает сумму начислений и выплат за текущий год</h4>
+<br>
+<table class="sl-table">
+    <tr class="sl-table__head">
+        <th class="sl-table__head-cell">Период</th>
+        <th class="sl-table__head-cell">Начислено</th>
+        <th class="sl-table__head-cell">Аванс</th>
+        <th class="sl-table__head-cell">ЗП</th>
+        <th class="sl-table__head-cell">Выплачено</th>
+        <th class="sl-table__head-cell">Разница</th>
+    </tr>
+    <% for (const accrual of getAccruals()) { %>
+    <% totalAccrued += accrual.accrued; %>
+    <% totalPrepaid += accrual.prepaid; %>
+    <% totalSalary += accrual.salary; %>
+
+    <tr class="sl-table__line">
+        <td class="sl-table__line-cell"><%= accrual.period %></td>
+        <td class="sl-table__line-cell"><%= accrual.accrued.toFixed(2) %></td>
+        <td class="sl-table__line-cell"><%= accrual.prepaid.toFixed(2) %></td>
+        <td class="sl-table__line-cell"><%= accrual.salary.toFixed(2) %></td>
+        <td class="sl-table__line-cell"></td>
+        <td class="sl-table__line-cell"></td>
+    </tr>
+    <% } %>
+    <tr class="sl-table__total">
+        <td class="sl-table__total-cell">Итого</td>
+        <td class="sl-table__total-cell"><%= totalAccrued.toFixed(2) %></td>
+        <td class="sl-table__total-cell"><%= totalPrepaid.toFixed(2) %></td>
+        <td class="sl-table__total-cell"><%= totalSalary.toFixed(2) %></td>
+        <td class="sl-table__total-cell"></td>
+        <td class="sl-table__total-cell"></td>
+    </tr>
+</table>
+<% } else { %>
+<h2>Данные отсутствуют</h2>
+<% } %>
