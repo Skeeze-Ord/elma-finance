@@ -46,7 +46,7 @@ async function onProjects() {
         Global.ns.finance.app.tabels.search().size(1000).all()
     ]);
 
-    // Объект для хранения сумм по периодам
+    // Объект для хранения начислений по периодам
     const accrualsMap: { [key: string]: IAccrualsTable } = {};
 
     for (const tabel of tabels) {
@@ -137,13 +137,6 @@ async function onProjects() {
 
     // accrualsMap в массив
     accrualsList = Object.keys(accrualsMap).map(key => accrualsMap[key]);
-
-    // Записи без периода в конец
-    accrualsList.sort((a, b) => {
-        if (a.period === "Без периода") return 1;
-        if (b.period === "Без периода") return -1;
-        return a.period.localeCompare(b.period);
-    });
 }
 
 // Убрать знаки после запятой
